@@ -52,7 +52,15 @@ class TasksController extends Controller
         $task = new Task;
         $task->status = $request->status;    // 追加
         $task->content = $request->content;
+        $task->user_id = \Auth::id();
         $task->save();
+        
+        // $request->user()->tasks()->create([
+        //     'content' => $request->content,
+        //     'status' => $request->status,
+        // ]);
+
+
 
         return redirect('/');
     }
@@ -104,6 +112,7 @@ class TasksController extends Controller
         $task = Task::find($id);
         $task->status = $request->status;    // 追加
         $task->content = $request->content;
+        $task->user_id = \Auth::id();
         $task->save();
 
         return redirect('/');
